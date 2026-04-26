@@ -5,8 +5,8 @@ if (isset($_COOKIE['login'])) {
 	header("location:index.php");
 }
 
-$user = "leite006@";
-$pass = "leite006@";
+$user = "bela30@";
+$pass = "bela30@";
 
 if (isset($_POST['user'])) {
 	if ($_POST['user'] == $user && $_POST['pass'] == $pass) {
