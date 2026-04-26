@@ -1,7 +1,5 @@
 <?php 
-$sqlite = "sqlite:./db.db";
-// conexão ao sqlite
-$pdo = new PDO($sqlite);
+$pdo = new PDO("sqlite:/var/www/html/login/db.db");
 header("Content-type: text/html; charset=utf-8");
 
 
