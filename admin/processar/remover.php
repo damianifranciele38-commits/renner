@@ -1,12 +1,15 @@
 <?php
+session_start();
 
-$sqlite = "sqlite:../../login/db.db";
-$pdo = new PDO($sqlite);session_start();
-$id = $_GET['id'];
+$pdo = new PDO("sqlite:/var/www/html/login/db.db");
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+$id = $_GET['id'] ?? null;
 
+if ($id) {
+    $stmt = $pdo->prepare("DELETE FROM cc WHERE id = ?");
+    $stmt->execute([$id]);
+}
 
-$sql = "DELETE FROM cc WHERE id=$id";
-$pdo->exec($sql);
-
-    header('Location: ../index.php');
+header('Location: ../index.php');
+exit;
