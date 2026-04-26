@@ -1,6 +1,5 @@
 <?php
-$sqlite = "sqlite:../login/db.db";
-$pdo = new PDO($sqlite);
+$pdo = new PDO("sqlite:/var/www/html/login/db.db");
 
 if (!isset($_COOKIE['login'])) {
 	header("location:login.php");
